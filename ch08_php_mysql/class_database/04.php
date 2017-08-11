@@ -10,14 +10,13 @@ $params = array(
 );
 
 $database = new Database($params);
-$data = array(
-    'username'  => 'hoanganh',
-    'password'  => '123',
-    'email'     => 'hoanganh@gmail.com'
+
+$data 	= array('password' => 1, 'email' => 'abc1@yahoo.com');
+$where	= array(
+    array('username', 'Admin 2', 'and'),
+    array('password', null, '')
 );
 
-echo $lastID = $database->insert($data);
+echo $update = $database->update($data, $where);
 
-//echo '<pre>';
-//print_r($database);
-//echo '</pre>';
+

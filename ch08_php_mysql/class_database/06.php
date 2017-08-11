@@ -9,15 +9,18 @@ $params = array(
     'table'     => 'manage_user'
 );
 
+$query[] 	= "SELECT * ";
+$query[] 	= "FROM `manage_user`";
+$query[] 	= "ORDER BY `id` DESC";
+$query		= implode(" ", $query);
+
 $database = new Database($params);
-$data = array(
-    'username'  => 'hoanganh',
-    'password'  => '123',
-    'email'     => 'hoanganh@gmail.com'
-);
 
-echo $lastID = $database->insert($data);
+$database->query($query);
+$list = $database->listRecord();
 
-//echo '<pre>';
-//print_r($database);
-//echo '</pre>';
+echo'<pre>';
+print_r($list);
+echo'</pre>';
+
+

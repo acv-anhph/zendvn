@@ -10,14 +10,9 @@ $params = array(
 );
 
 $database = new Database($params);
-$data = array(
-    'username'  => 'hoanganh',
-    'password'  => '123',
-    'email'     => 'hoanganh@gmail.com'
-);
 
-echo $lastID = $database->insert($data);
+$id = array(200);
 
-//echo '<pre>';
-//print_r($database);
-//echo '</pre>';
+echo $delete = $database->delete($id);
+
+
