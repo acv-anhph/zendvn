@@ -4,7 +4,7 @@ class Bootstrap {
     private $_params;
     private $_controllerObj;
     
-    public function __construct() {
+    public function init() {
         $this->setParams();
         
         $controllerName = ucfirst($this->_params['controller']) . 'Controller';
@@ -15,6 +15,7 @@ class Bootstrap {
             $this->callMethod();
         } else {
             $this->loadDefaultController();
+            $this->callMethod();
         }
     }
     
@@ -27,14 +28,12 @@ class Bootstrap {
     
     private function loadDefaultController() {
         $controllerName	= ucfirst(DEFAULT_CONTROLLER) . 'Controller';
-        $actionname = ucfirst(DEFAULT_ACTION) . 'Action';
+        $defaultAction = DEFAULT_ACTION . 'Action';
         $filePath	= APPLICATION_PATH . DEFAULT_MODULE . DS . 'controllers' . DS . $controllerName . '.php';
         if (file_exists($filePath)) {
             require_once $filePath;
         
-            $this->_controllerObj = new $controllerName();
-            $this->_controllerObj->setView(DEFAULT_MODULE);
-            $this->_controllerObj->$actionname();
+            $this->_controllerObj = new $controllerName(array('module' => DEFAULT_MODULE, 'controller' => DEFAULT_CONTROLLER));
         }
     }
     
@@ -42,15 +41,12 @@ class Bootstrap {
         if (file_exists($path)) {
             require_once $path;
             
-            $this->_controllerObj = new $controllerName();
-            $this->_controllerObj->loadModel($this->_params['module'], $this->_params['action']);
-            $this->_controllerObj->setView($this->_params['module']);
-            $this->_controllerObj->setParams($this->_params);
+            $this->_controllerObj = new $controllerName($this->_params);
         }
     }
     
     private function callMethod() {
-        $actionname = ucfirst($this->_params['action']) . 'Action';
+        $actionname = $this->_params['action'] . 'Action';
         if (method_exists($this->_controllerObj, $actionname)) {
             $this->_controllerObj->$actionname();
         } else {
@@ -61,8 +57,7 @@ class Bootstrap {
     
     private function _error() {
         require_once APPLICATION_PATH . 'default' . DS . 'controllers' . DS . 'ErrorController' . '.php';
-        $this->_controllerObj = new ErrorController();
-        $this->_controllerObj->setView('default');
-        $this->_controllerObj->IndexAction();
+        $this->_controllerObj = new ErrorController(array('module' => DEFAULT_MODULE, 'controller' => 'error'));
+        $this->_controllerObj->indexAction();
     }
 }

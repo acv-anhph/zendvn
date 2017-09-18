@@ -1,11 +1,8 @@
 <?php
 
-class IndexModel {
-    public function __construct() {
-        echo __METHOD__ . '<br/>';
-    }
+class IndexModel extends Model {
     
-    public function IndexAction() {
-        echo __METHOD__ . '<br/>';
+    public function indexAction() {
+    
     }
 }
