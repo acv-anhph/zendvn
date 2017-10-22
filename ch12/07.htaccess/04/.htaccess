@@ -1,0 +1,7 @@
+#<Files "image.jpg">
+#deny from all
+#</Files>
+
+<Files "*.jpg" >
+deny from all
+</Files>

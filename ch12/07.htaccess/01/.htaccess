@@ -1,0 +1,7 @@
+# ------------- Cam truy cap tu tat ca cac IP --------------------
+
+#Deny from all
+
+# ------------- Cam truy cap tu mot dia chi IP --------------------
+
+#Deny from 192.168.2.101
