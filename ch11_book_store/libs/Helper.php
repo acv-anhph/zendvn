@@ -91,10 +91,23 @@ class Helper {
         
         return $xhtml;
     }
-    
-    public static function cmsInput() {
-        $xhtml = '';
-        
+
+    // Create Input
+    public static function cmsInput($type, $name, $id, $value, $class = null, $size = null){
+        $strSize	=	($size==null) ? '' : "size='$size'";
+        $strClass	=	($class==null) ? '' : "class='$class'";
+
+        $xhtml = "<input type='$type' name='$name' id='$id' value='$value' $strClass $strSize>";
+
+        return $xhtml;
+    }
+
+    // Create Row
+    public static function cmsRowForm($lblName, $input, $require = false){
+        $strRequired = '';
+        if($require == true ) $strRequired = '<span class="star">&nbsp;*</span>';
+        $xhtml = '<li><label>'.$lblName.$strRequired.'</label>'.$input.'</li>';
+
         return $xhtml;
     }
 }

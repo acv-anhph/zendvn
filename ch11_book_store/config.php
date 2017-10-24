@@ -2,11 +2,11 @@
 
 // ====================== PATHS ===========================
 define('DS', '/');
-define('ROOT_PATH', dirname(__FILE__));                            // Định nghĩa đường dẫn đến thư mục gốc
+define('ROOT_PATH', dirname(__FILE__));                                 // Định nghĩa đường dẫn đến thư mục gốc
 define('LIBRARY_PATH', ROOT_PATH . DS . 'libs' . DS);                   // Định nghĩa đường dẫn đến thư mục thư viện
 define('PUBLIC_PATH', ROOT_PATH . DS . 'public' . DS);                  // Định nghĩa đường dẫn đến thư mục public
 define('APPLICATION_PATH', ROOT_PATH . DS . 'application' . DS);        // Định nghĩa đường dẫn đến thư mục application
-define('MODULE_PATH', APPLICATION_PATH . 'module' . DS);           // Định nghĩa đường dẫn đến thư mục module
+define('MODULE_PATH', APPLICATION_PATH . 'module' . DS);                // Định nghĩa đường dẫn đến thư mục module
 define('TEMPLATE_PATH', PUBLIC_PATH . 'templates' . DS);                // Định nghĩa đường dẫn đến thư mục template
 
 define('ROOT_URL', DS . 'ch11_book_store' . DS);
@@ -24,8 +24,9 @@ define('DB_TABLE', 'group');
 
 // ====================== DATABASE TABLE===========================
 define('GROUP_TABLE', 'group');
+define('USER_TABLE', 'user');
 
 // ====================== DEFAULT ===========================
-define('DEFAULT_MODULE', 'default');
-define('DEFAULT_CONTROLLER', 'user');
-define('DEFAULT_ACTION', 'login');
+define('DEFAULT_MODULE', 'admin');
+define('DEFAULT_CONTROLLER', 'group');
+define('DEFAULT_ACTION', 'index');

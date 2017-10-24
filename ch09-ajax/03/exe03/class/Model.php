@@ -4,20 +4,21 @@ class Model {
     protected $conn;
     protected $table;
     protected $resultQuery;
-
-
+    
+    
     public function __construct($params = array()) {
         if (!$params) {
-            $params['server'] = DB_HOST;
+            $params['server']   = DB_HOST;
             $params['username'] = DB_USER;
             $params['password'] = DB_PASS;
             $params['database'] = DB_NAME;
-            $params['table'] = DB_TABLE;
+            $params['table']    = DB_TABLE;
         }
-
+        
         $link = mysqli_connect($params['server'], $params['username'], $params['password'], $params['database']);
         if (!$link) {
-            die('Connect Error (' . mysqli_connect_errno() . ') ' . mysqli_connect_error());
+            die('Connect Error (' . mysqli_connect_errno() . ') '
+                . mysqli_connect_error());
         } else {
             $this->conn = $link;
             $this->table = $params['table'];
@@ -25,15 +26,15 @@ class Model {
             $this->query("SET CHARACTER SET 'utf8'");
         }
     }
-
+    
     public function __destruct() {
         mysqli_close($this->conn);
     }
-
-    public function setTable($table) {
-        $this->table = $table;
-    }
-
+	
+	public function setTable($table) {
+		$this->table = $table;
+	}
+    
     public function insert($data, $type = 'single') {
         if ($type == 'single') {
             $newQuery = $this->createInsertSQL($data);
@@ -46,10 +47,10 @@ class Model {
                 mysqli_query($this->conn, $query);
             }
         }
-
+        
         return $this->lastID();
     }
-
+    
     public function createInsertSQL($data) {
         $newQuery = array();
         $cols = '';
@@ -62,27 +63,27 @@ class Model {
         }
         $newQuery['cols'] = substr($cols, 2);
         $newQuery['vals'] = substr($vals, 2);
-
+        
         return $newQuery;
     }
-
+    
     public function lastID() {
         return mysqli_insert_id($this->conn);
     }
-
+    
     public function query($query) {
         return $this->resultQuery = mysqli_query($this->conn, $query);
     }
-
+    
     public function update($data, $where) {
         $newSet = $this->createUpdateSQL($data);
         $newWhere = $this->createWhereUpdateSQL($where);
         $query = "UPDATE `$this->table` SET " . $newSet . " WHERE $newWhere";
         $this->query($query);
-
+        
         return $this->affectedRows();
     }
-
+    
     // CREATE UPDATE SQL
     public function createUpdateSQL($data) {
         $newQuery = "";
@@ -92,10 +93,10 @@ class Model {
             }
         }
         $newQuery = substr($newQuery, 2);
-
+        
         return $newQuery;
     }
-
+    
     // CREATE WHERE UPDATE SQL
     public function createWhereUpdateSQL($data) {
         $newWhere = '';
@@ -106,24 +107,24 @@ class Model {
             }
             $newWhere = implode(" ", $newWhere);
         }
-
+        
         return $newWhere;
     }
-
+    
     // tra ve tong so dong vua thuc hien
     public function affectedRows() {
         return mysqli_affected_rows($this->conn);
     }
-
+    
     // DELETE
     public function delete($where) {
         $newWhere = $this->createWhereDeleteSQL($where);
         $query = "DELETE FROM `$this->table` WHERE `id` IN ($newWhere)";
         $this->query($query);
-
+        
         return $this->affectedRows();
     }
-
+    
     // CREATE WHERE DELTE SQL
     public function createWhereDeleteSQL($data) {
         $newWhere = '';
@@ -133,11 +134,11 @@ class Model {
             }
             $newWhere .= "'0'";
         }
-
+        
         return $newWhere;
     }
-
-    public function fetchAll($query) {
+    
+    public function listRecord($query) {
         $result = array();
         if (!empty($query)) {
             $resultQuery = $this->query($query);
@@ -148,11 +149,11 @@ class Model {
                 mysqli_free_result($resultQuery);
             }
         }
-
+        
         return $result;
     }
-
-    public function fetchRow($query) {
+    
+    public function singleRecord($query) {
         $result = array();
         if (!empty($query)) {
             $resultQuery = $this->query($query);
@@ -161,51 +162,32 @@ class Model {
             }
         }
 
-        //        mysqli_free_result($resultQuery);
+//        mysqli_free_result($resultQuery);
         return $result;
     }
-
+    
     public function checkExit($query) {
         if ($query != null) {
             $this->resultQuery = $this->query($query);
         }
-
+        
         return (mysqli_num_rows($this->resultQuery) > 0) ? true : false;
     }
-
+    
     public function countItem($query) {
         if (!empty($query)) {
             $resultQuery = $this->query($query);
-            return mysqli_num_rows($resultQuery);
         }
-
-        return 0;
+        
+        return (mysqli_num_rows($resultQuery)) ? mysqli_num_rows($resultQuery) : 0;
     }
-
+    
     public function isExist($query) {
         if ($query != null) {
             $this->resultQuery = $this->query($query);
         }
-        if (mysqli_num_rows($this->resultQuery) > 0) {
-            return true;
-        }
-
+        if (mysqli_num_rows($this->resultQuery) > 0) return true;
+        
         return false;
-    }
-
-    // LIST RECORD
-    public function fetchPairs($query) {
-        $result = array();
-        if (!empty($query)) {
-            $resultQuery = $this->query($query);
-            if (mysqli_num_rows($resultQuery) > 0) {
-                while ($row = mysqli_fetch_assoc($resultQuery)) {
-                    $result[$row['id']] = $row['name'];
-                }
-                mysqli_free_result($resultQuery);
-            }
-        }
-
-        return $result;
     }
 }
