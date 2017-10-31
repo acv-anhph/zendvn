@@ -11,6 +11,9 @@ class IndexController extends Controller {
     }
 
     public function indexAction() {
+        echo '<pre>';
+        print_r($_SESSION);
+        echo '</pre>';
         $this->_view->render('index/index');
     }
 

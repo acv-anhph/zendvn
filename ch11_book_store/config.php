@@ -31,3 +31,4 @@ define('USER_TABLE', 'user');
 define('DEFAULT_MODULE', 'default');
 define('DEFAULT_CONTROLLER', 'index');
 define('DEFAULT_ACTION', 'index');
+define('SESSSION_LOGIN', 3600);
