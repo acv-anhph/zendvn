@@ -1,17 +1,20 @@
-<!DOCTYPE html>
-<head>
-    <?php echo $this->_metaHTTP;?>
-    <?php echo $this->_metaName;?>
-    <?php echo $this->_title;?>
-    <?php echo $this->_cssFiles;?>
-    <?php echo $this->_jsFiles;?>
-</head>
-<body>
-  <section class="container">
-   <?php 
-			require_once MODULE_PATH. $this->_moduleName . DS . 'views' . DS . $this->_fileView . '.php';
-		?>
-  </section>
+<?php require_once TEMPLATE_PATH . 'default/main/html/header.php' ?>
 
-</body>
-</html>
+<div class="center_content">
+    <div class="left_content">
+        <?php require_once MODULE_PATH . $this->_moduleName . DS . 'views' . DS . $this->_fileView . '.php'; ?>
+
+        <div class="clear"></div>
+    </div><!--end of left content-->
+
+    <div class="right_content">
+        <?php require_once BLOCK_PATH . 'language.php'; ?>
+        <?php require_once BLOCK_PATH . 'cart.php'; ?>
+        <?php require_once BLOCK_PATH . 'promotion.php'; ?>
+        <?php require_once BLOCK_PATH . 'category.php'; ?>
+    </div><!--end of right content-->
+    <div class="clear"></div>
+</div><!--end of center content-->
+
+<?php require_once TEMPLATE_PATH . 'default/main/html/footer.php' ?>
+

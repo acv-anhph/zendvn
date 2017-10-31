@@ -1,0 +1,31 @@
+
+.list-quiz p {
+	font-style: 20px;
+	font-weight: bold;
+}
+
+.list-quiz .page-header {
+	border-bottom: 0px;
+	text-align: center;
+	color: #db3179;
+}
+
+.thumbnail {
+	padding: 12px 0px 2px 0px;
+}
+
+.thumbnail .caption {
+	padding: 2px;
+	color: #333;
+	text-align: center;
+}
+
+.thumbnail .caption h3{
+	margin: 10px;
+	font-size: 20px;
+	color: #5f8219;
+}
+
+.thumbnail .caption p {
+	font-weight: 400;
+}

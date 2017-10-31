@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>PHP Show Data</title>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+</head>		
+<body>
+	<div class="container list-course">
+		<h1 class="page-header">Khoá học trực tuyến</h1>
+		<div class="row content-course">
+			<div class="media">
+				<a class="pull-left" href="#"><img class="media-object"
+					src="data/bootstrap.jpg"></a>
+				<div class="media-body">
+					<h4 class="media-heading">Xây dựng website responsive với
+						Bootstrap</h4>
+					Đây là một trong những CSS framework lớn nhất và thông dụng nhất
+					hiện nay. Bootstrap framework sẽ giúp các bạn xây dựng nhanh giao
+					diện web theo đúng chuẩn của w3C và ngoài ra hỗ trợ bạn làm web
+					trên mọi thiết bị khác nhau như laptop, tablet, smartphone (web
+					responsive
+				</div>
+			</div>
+			<div class="media">
+				<a class="pull-left" href="#"><img class="media-object"
+					src="data/html.jpg"></a>
+				<div class="media-body">
+					<h4 class="media-heading">Xây dựng website tĩnh với
+						Dreamweaver</h4>
+					Như chúng ta đã biết website đã trở thành một thành phần không thể
+					thiếu của thời đại công nghệ thông tin ngày nay. Một tổ chức, một
+					doanh nghiệp, một cơ quan hay thậm chí một cá nhân đều cần một
+					website cho công việc của mình. Mặt khác việc có thể xây dựng một
+					website lại là một vấn đề không đơn giản, nó đòi hỏi người xây dựng
+					phải có kiến thức về thiết kế và lập trình web.
+				</div>
+			</div>
+			<div class="media">
+				<a class="pull-left" href="#"><img class="media-object"
+					src="data/joomla.jpg"></a>
+				<div class="media-body">
+					<h4 class="media-heading">Lập trình Joomla 2.5</h4>
+					Joomla CMS là một hệ thống quản lý dữ liệu được đánh giá rất cao
+					hiện nay, Joomla rất dễ sử dụng để xây dựng một website và rất thân
+					thiện với người sử dụng. Nhưng để lập trình tạo ra các thành phần
+					mở rộng như Component, Module, Plugin, Template... cho nó thì không
+					đơn giản một chút nào vì cấu trúc Joomla CMS khá
+				</div>
+			</div>
+		</div>
+		<div class="row pages" >
+			<div class="input-group col-md-4 col-md-offset-4">
+				<div class="input-group-btn">
+					<button type="button" class="btn btn-default pageInfo" disabled="disabled">Page 1 of 6</button>
+					<button type="button" class="btn btn-default goPrevious">&laquo; Previous</button>
+				</div>
+				<select class="form-control" id="currentPage">
+					
+				</select>
+				<div class="input-group-btn">
+					<button type="button" class="btn btn-default goNext">Next &raquo;</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/paging.js"></script>
+</body>
+</html>

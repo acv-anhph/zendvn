@@ -1,0 +1,30 @@
+.print_r {
+	display: block;
+	background-color: #f6e8f0;
+}
+
+.list-course .page-header {
+	border-bottom: 0px;
+	text-align: center;
+	color: #db3179;
+}
+
+.list-course .content-course {
+	padding: 20px;
+	border-radius: 10px;
+	border: 2px solid #abc3ae;
+	margin-bottom: 20px;
+}
+
+.list-course .media{
+	margin-bottom: 28px;
+}
+
+.list-course .media-body .media-heading {
+	margin-bottom: 15px;
+	font-weight: bold;
+}
+
+.list-course .media-body {
+	text-align: justify;
+}

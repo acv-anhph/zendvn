@@ -65,7 +65,7 @@ class Template {
             }
     
             if (!empty($arrCongif['dirImg'])) {
-                $view->_dirImg 		= $arrCongif['dirImg'];
+                $view->_dirImg 		= TEMPLATE_URL . $this->_folderTemplate . $arrCongif['dirImg'];
             }
     
     
@@ -111,8 +111,4 @@ class Template {
     public function createTitle($value){
         return '<title>'.$value.'</title>';
     }
-    
-    
-    
-    
 }

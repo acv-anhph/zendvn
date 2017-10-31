@@ -39,9 +39,9 @@ class GroupController extends Controller {
             }else{
                 $task	= (isset($this->_arrParam['form']['id'])) ? 'edit' : 'add';
                 $id	= $this->_model->saveItem($this->_arrParam, array('task' => $task));
-                if($this->_arrParam['type'] == 'save-close') 	URL::redirect(URL::createLink('admin', 'group', 'index'));
-                if($this->_arrParam['type'] == 'save-new') 		URL::redirect(URL::createLink('admin', 'group', 'form'));
-                if($this->_arrParam['type'] == 'save') 			URL::redirect(URL::createLink('admin', 'group', 'form', array('id' => $id)));
+                if($this->_arrParam['type'] == 'save-close') 	URL::redirect('admin', 'group', 'index');
+                if($this->_arrParam['type'] == 'save-new') 		URL::redirect('admin', 'group', 'form');
+                if($this->_arrParam['type'] == 'save') 			URL::redirect('admin', 'group', 'form', array('id' => $id));
             }
         }
         $this->_view->arrParam = $this->_arrParam;
@@ -60,16 +60,16 @@ class GroupController extends Controller {
     
     public function statusAction() {
         $this->_model->changeStatus($this->_arrParam, $option = array('task' => 'change-status'));
-        URL::redirect(URL::createLink('admin', 'group', 'index'));
+        URL::redirect('admin', 'group', 'index');
     }
     
     public function deleteAction() {
         $this->_model->deleteItem($this->_arrParam);
-        URL::redirect(URL::createLink('admin', 'group', 'index'));
+        URL::redirect('admin', 'group', 'index');
     }
     
     public function orderingAction() {
         $this->_model->changeOrdering($this->_arrParam);
-        URL::redirect(URL::createLink('admin', 'group', 'index'));
+        URL::redirect('admin', 'group', 'index');
     }
 }

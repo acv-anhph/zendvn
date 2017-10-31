@@ -30,7 +30,7 @@ class UserController extends Controller {
             $this->_arrParam['form'] = $this->_model->infoItem($this->_arrParam);
         }
 
-        if (isset($this->_arrParam['form']) && !empty($this->_arrParam['form']['token'])) {
+        if (isset($this->_arrParam['form']['token'])) {
             $validate = new Validate($this->_arrParam['form']);
             $validate->addRule('username', 'string', array('min' => 3, 'max' => 255))
                      ->addRule('email', 'email')
@@ -46,13 +46,13 @@ class UserController extends Controller {
                 $task = (isset($this->_arrParam['form']['id'])) ? 'edit' : 'add';
                 $id = $this->_model->saveItem($this->_arrParam, array('task' => $task));
                 if ($this->_arrParam['type'] == 'save-close') {
-                    URL::redirect(URL::createLink('admin', 'user', 'index'));
+                    URL::redirect('admin', 'user', 'index');
                 }
                 if ($this->_arrParam['type'] == 'save-new') {
-                    URL::redirect(URL::createLink('admin', 'user', 'form'));
+                    URL::redirect('admin', 'user', 'form');
                 }
                 if ($this->_arrParam['type'] == 'save') {
-                    URL::redirect(URL::createLink('admin', 'user', 'form', array('id' => $id)));
+                    URL::redirect('admin', 'user', 'form', array('id' => $id));
                 }
             }
         }
@@ -68,16 +68,16 @@ class UserController extends Controller {
 
     public function statusAction() {
         $this->_model->changeStatus($this->_arrParam, $option = array('task' => 'change-status'));
-        URL::redirect(URL::createLink('admin', 'user', 'index'));
+        URL::redirect('admin', 'user', 'index');
     }
 
     public function deleteAction() {
         $this->_model->deleteItem($this->_arrParam);
-        URL::redirect(URL::createLink('admin', 'user', 'index'));
+        URL::redirect('admin', 'user', 'index');
     }
 
     public function orderingAction() {
         $this->_model->changeOrdering($this->_arrParam);
-        URL::redirect(URL::createLink('admin', 'user', 'index'));
+        URL::redirect('admin', 'user', 'index');
     }
 }

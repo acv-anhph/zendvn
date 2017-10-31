@@ -54,7 +54,7 @@ $strMessage = Helper::cmsMessage($message);
                 <fieldset class="adminform">
                     <legend>Details</legend>
                     <ul class="adminformlist">
-                        <?php echo $rowUsername . $rowPassword . $rowEmail . $rowFullname . $rowStatus . $rowOrdering . $rowGroup . $rowID; ?>
+                        <?php echo $rowUsername . $rowEmail . $rowFullname . $rowStatus . $rowOrdering . $rowGroup . $rowID; ?>
                     </ul>
                     <div class="clr"></div>
                     <div>

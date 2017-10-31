@@ -13,7 +13,7 @@ $linkAddGroup     = URL::createLink( 'admin', 'group', 'add' );
 <head>
 	<?php echo $this->_metaHTTP; ?>
 	<?php echo $this->_metaName; ?>
-    <title><?php echo $this->_title; ?></title>
+    <?php echo $this->_title; ?>
 	<?php echo $this->_cssFiles; ?>
 	<?php echo $this->_jsFiles; ?>
 </head>

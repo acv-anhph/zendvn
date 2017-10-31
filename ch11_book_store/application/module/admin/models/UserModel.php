@@ -38,8 +38,8 @@ class UserModel extends Model {
     public function listItems($arrParam, $option = null) {
         $query = array();
         $query[] = "SELECT u.*, g.name AS group_name";
-        $query[] = "FROM `$this->table` AS `u`, `" . GROUP_TABLE . "` AS `g`";
-        $query[] = "WHERE `u`.`group_id` = `g`.`id`";
+        $query[] = "FROM `$this->table` AS `u` LEFT JOIN `" . GROUP_TABLE . "` AS `g` ON `u`.`group_id` = `g`.`id`";
+        $query[] = "WHERE `u`.`id` > 0";
 
         // Filter: keyword
         if (!empty($arrParam['filter_search'])) {
