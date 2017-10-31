@@ -1,6 +1,9 @@
+<?php
+$action = URL::createLink('default', 'user', 'login');
+?>
 <div class="login">
     <h1>Login to Web App</h1>
-    <form method="post" action="index.html">
+    <form method="post" action="<?php echo $action; ?>">
         <p><input type="text" name="login" value="" placeholder="Username or Email"></p>
         <p><input type="password" name="password" value="" placeholder="Password"></p>
         <p class="remember_me">
@@ -14,5 +17,5 @@
 </div>
 
 <div class="login-help">
-    <p>Forgot your password? <a href="index.html">Click here to reset it</a>.</p>
+    <p>Forgot your password? <a href="#">Click here to reset it</a>.</p>
 </div>

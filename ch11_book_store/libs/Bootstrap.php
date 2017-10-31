@@ -56,18 +56,24 @@ class Bootstrap {
             $action     = $this->_params['action'];
             $user       = Session::get('user');
             $logged = $user['login'] == true && ($user['time'] + SESSSION_LOGIN > time());
-            $pageLogin = ($controller == 'index') && ($action == 'login');
+            $adminPageLogin = ($controller == 'index') && ($action == 'login');
+            $publicPageLogin = ($controller == 'user') && ($action == 'login');
 
             if ($module == 'admin') {
                 if ($logged) {
                     if ($user['group_acp'] == 1) {
+                        if ($adminPageLogin) {
+                            URL::redirect('admin', 'index', 'index');
+                        } else {
+                            $this->_controllerObj->$actionname();
+                        }
                         $this->_controllerObj->$actionname();
                     } else {
                         URL::redirect('default', 'index', 'notice', array('type' => 'not-permission'));
                     }
                 } else {
                     Session::delete('user');
-                    if ($pageLogin) {
+                    if ($adminPageLogin) {
                         $this->_controllerObj->$actionname();
                     } else {
                         URL::redirect('admin', 'index', 'login');
@@ -75,12 +81,17 @@ class Bootstrap {
                 }
             } else {
                 if ($logged) {
-                    $this->_controllerObj->$actionname();
+                    if ($publicPageLogin) {
+                        URL::redirect('default', 'index', 'index');
+                    } else {
+                        $this->_controllerObj->$actionname();
+                    }
                 } else {
-                    if ($pageLogin) {
+                    Session::delete('user');
+                    if ($publicPageLogin) {
                         $this->_controllerObj->$actionname();
                     } else {
-                        URL::redirect('default', 'index', 'login');
+                        URL::redirect('default', 'user', 'login');
                     }
                 }
             }
