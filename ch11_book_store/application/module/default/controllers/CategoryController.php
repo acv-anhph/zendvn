@@ -11,7 +11,7 @@ class CategoryController extends Controller {
     }
     
     public function indexAction() {
-        $this->_view->render('index/index');
+        $this->_view->render('category/index');
 	}
 
 }

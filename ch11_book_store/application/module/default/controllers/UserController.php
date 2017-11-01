@@ -46,7 +46,8 @@ class UserController extends Controller {
         $this->_view->render('user/index');
     }
 
-    public function loginAction() {
-        $this->_view->render('user/login');
+    public function logoutAction() {
+        Session::delete('user');
+        URL::redirect('default', 'user', 'login');
     }
 }

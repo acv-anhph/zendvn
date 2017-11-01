@@ -119,4 +119,14 @@ class Helper {
         }
         return $xhtml;
     }
+
+    public static function cmsRow($lblName, $input, $submit = false){
+        if($submit==false){
+            $xhtml = '<div class="form_row"><label class="contact"><strong>'.$lblName.':</strong></label>'.$input.'</div>';
+        }else{
+            $xhtml = '<div class="form_row">'.$input.'</div>';
+        }
+        return $xhtml;
+    }
+
 }

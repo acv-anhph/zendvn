@@ -1,11 +1,12 @@
 <?php
-$linkControlPanel = URL::createLink('admin', 'control', 'index');
-$linkMyProfile    = URL::createLink('admin', 'profile', 'index');
+$linkControlPanel = URL::createLink('admin', 'index', 'index');
+$linkMyProfile    = URL::createLink('admin', 'index', 'profile');
 $linkUserManager  = URL::createLink('admin', 'user', 'index');
-$linkAddUser      = URL::createLink('admin', 'user', 'add');
+$linkAddUser      = URL::createLink('admin', 'user', 'form');
 $linkGroupManager = URL::createLink('admin', 'group', 'index');
-$linkAddGroup     = URL::createLink('admin', 'group', 'add');
+$linkAddGroup     = URL::createLink('admin', 'group', 'form');
 $linkLogout       = URL::createLink('admin', 'index', 'logout');
+$linkViewSite     = URL::createLink('default', 'index', 'index');
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
@@ -14,7 +15,7 @@ $linkLogout       = URL::createLink('admin', 'index', 'logout');
 <head>
     <?php echo $this->_metaHTTP; ?>
     <?php echo $this->_metaName; ?>
-    <?php echo $this->_title; ?>
+    <title><?php echo $this->_title;?></title>
     <?php echo $this->_cssFiles; ?>
     <?php echo $this->_jsFiles; ?>
 </head>
@@ -26,6 +27,7 @@ $linkLogout       = URL::createLink('admin', 'index', 'logout');
 <!-- HEADER -->
 <div id="header-box">
     <div id="module-status">
+        <span class="viewsite"><a href="<?php echo $linkViewSite;?>" target="_blank">View Site</a></span>
         <span class="no-unread-messages"><a href="<?php echo $linkLogout;?>">Log out</a></span>
     </div>
     <div id="module-menu">

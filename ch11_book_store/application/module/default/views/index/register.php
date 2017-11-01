@@ -16,7 +16,7 @@ $rowFullname = Helper::cmsRowFormPulic('Fullname', Helper::cmsInput('text', 'for
 $rowEmail    = Helper::cmsRowFormPulic('Email', Helper::cmsInput('text', 'form[email]', 'email', $dataForm['email'], 'contact_input'));
 $rowPassword = Helper::cmsRowFormPulic('Password', Helper::cmsInput('text', 'form[password]', 'password', $dataForm['password'], 'contact_input'));
 $rowSubmit   = Helper::cmsRowFormPulic('', Helper::cmsInput('hidden', 'form[token]', 'token', time(), '').Helper::cmsInput('submit', 'form[submit]', 'submit', 'Đăng ký', 'register'), true);
-$actionForm  = URL::createLink('default', 'user', 'register');
+$actionForm  = URL::createLink('default', 'index', 'register');
 $errors  = (!empty($this->errors)) ? $this->errors : '';
 ?>
 <div class="left_content">

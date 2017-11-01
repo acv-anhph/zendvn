@@ -1,13 +1,11 @@
 <?php
 
-include_once 'toolbar/index.php';
-include_once 'submenu/index.php';
+include_once (MODULE_PATH . 'admin/views/toolbar.php');
+include_once (MODULE_PATH . 'admin/views/submenu.php');
 
 // Input
 $dataForm = (!empty($this->arrParam['form'])) ? $this->arrParam['form'] : array();
-echo '<pre>';
-print_r($dataForm);
-echo '</pre>';
+
 $inputUsername = Helper::cmsInput('text', 'form[username]', 'username', (!empty($dataForm['username'])) ? $dataForm['username'] : null, 'inputbox required', 40);
 $inputEmail    = Helper::cmsInput('text', 'form[email]', 'email', (!empty($dataForm['email'])) ? $dataForm['email'] : null, 'inputbox required', 40);
 $inputFullName = Helper::cmsInput('text', 'form[fullname]', 'fullname', (!empty($dataForm['fullname'])) ? $dataForm['fullname'] : null, 'inputbox', 40);
@@ -54,7 +52,7 @@ $strMessage = Helper::cmsMessage($message);
                 <fieldset class="adminform">
                     <legend>Details</legend>
                     <ul class="adminformlist">
-                        <?php echo $rowUsername . $rowEmail . $rowFullname . $rowStatus . $rowOrdering . $rowGroup . $rowID; ?>
+                        <?php echo $rowUsername . $rowEmail . $rowPassword .$rowFullname . $rowStatus . $rowOrdering . $rowGroup . $rowID; ?>
                     </ul>
                     <div class="clr"></div>
                     <div>

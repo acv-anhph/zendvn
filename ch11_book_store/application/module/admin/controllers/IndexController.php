@@ -11,13 +11,16 @@ class IndexController extends Controller {
     }
 
     public function indexAction() {
-        echo '<pre>';
-        print_r($_SESSION);
-        echo '</pre>';
+        $this->_view->_title = 'Control Panel';
         $this->_view->render('index/index');
     }
 
     public function loginAction() {
+        $userInfo = Session::get('user');
+        if ($userInfo['login'] == true && ($userInfo['time'] + SESSSION_LOGIN > time())) {
+            URL::redirect('admin', 'index', 'index');
+        }
+
         $this->_templateObj->setFolderTemplate('admin/main/');
         $this->_templateObj->setFileTemplate('login.php');
         $this->_templateObj->setFileConfig('template.ini');
@@ -52,5 +55,12 @@ class IndexController extends Controller {
     public function logoutAction() {
         Session::delete('user');
         URL::redirect('admin', 'index', 'login');
+    }
+
+    public function profileAction() {
+        $this->_view->_title = 'Profile';
+        $userObj	= Session::get('user');
+        $this->_view->arrParam['form']	= $userObj['info'];
+        $this->_view->render('index/profile');
     }
 }

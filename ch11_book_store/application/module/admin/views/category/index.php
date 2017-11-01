@@ -7,10 +7,8 @@ $columnPost     = !empty($this->arrParam['filter-column']) ? $this->arrParam['fi
 $orderPost      = !empty($this->arrParam['filter-column-dir']) ? $this->arrParam['filter-column-dir'] : '';
 $keyword        = !empty($this->arrParam['filter_search']) ? $this->arrParam['filter_search'] : '';
 $filterState    = isset($this->arrParam['filter_state']) ? $this->arrParam['filter_state'] : 'default';
-$filterACP    = isset($this->arrParam['filter_acp']) ? $this->arrParam['filter_acp'] : 'default';
 $lblName        = Helper::cmsTitleSost('Name', 'name', $columnPost, $orderPost);
 $lblStatus      = Helper::cmsTitleSost('Status', 'status', $columnPost, $orderPost);
-$lblGroupACP    = Helper::cmsTitleSost('Group ACP', 'group_acp', $columnPost, $orderPost);
 $lblOrdering    = Helper::cmsTitleSost('Ordering', 'ordering', $columnPost, $orderPost);
 $lblCreated     = Helper::cmsTitleSost('Created', 'created', $columnPost, $orderPost);
 $lblCreatedBy   = Helper::cmsTitleSost('Created By', 'created_by', $columnPost, $orderPost);
@@ -22,11 +20,8 @@ $lblID = Helper::cmsTitleSost('ID', 'id', $columnPost, $orderPost);
 $arrStatus			= array('default' => '- Select Status -', 1 => 'Publish',  0 => 'Unpublish');
 $selectboxStatus	= Helper::cmsSelectBox('filter_state', 'inputbox', $arrStatus, $filterState);
 
-$arrACP			= array('default' => '- Select Group ACP -', 1 => 'Yes',  0 => 'No');
-$selectboxACP	= Helper::cmsSelectBox('filter_acp', 'inputbox', $arrACP, $filterACP);
-
 //pagination
-$pagination = $this->pagination->showPagination(URL::createLink('admin', 'group', 'index'));
+$pagination = $this->pagination->showPagination(URL::createLink('admin', 'category', 'index'));
 
 //message
 $message = '';
@@ -55,7 +50,7 @@ if (isset($_SESSION['message'])) {
                     <button type="button" name="clear-keyword">Clear</button>
                 </div>
                 <div class="filter-select fltrt">
-                    <?php echo $selectboxStatus . $selectboxACP;?>
+                    <?php echo $selectboxStatus;?>
                 </div>
             </fieldset>
             <div class="clr"></div>
@@ -67,7 +62,6 @@ if (isset($_SESSION['message'])) {
                         <th width="1%"><input type="checkbox" name="checkall-toggle"></th>
                         <th class="title"><?php echo $lblName; ?></th>
                         <th width="10%"><?php echo $lblStatus; ?></th>
-                        <th width="10%"><?php echo $lblGroupACP; ?></th>
                         <th width="10%"><?php echo $lblOrdering; ?></th>
                         <th width="10%"><?php echo $lblCreated; ?></th>
                         <th width="10%"><?php echo $lblCreatedBy; ?></th>
@@ -92,8 +86,8 @@ if (isset($_SESSION['message'])) {
                     
                     <?php
                     
-                    if (!empty($this->groupList)):
-                        foreach ($this->groupList as $key => $item):
+                    if (!empty($this->categoryList)):
+                        foreach ($this->categoryList as $key => $item):
                             $i = ($key % 2 == 0) ? 'row0' : 'row1';
                             $id = $item['id'];
                             $name = $item['name'];
@@ -107,18 +101,16 @@ if (isset($_SESSION['message'])) {
     
                             $ordering   = '<input type="text" class="text-area-order" name="order[' . $id . ']" value="' . $item['ordering'] . '">';
                             $checkboxStr = '<input type="checkbox" id="' . $id . '" name="cid[]" value="' . $id . '">';
-                            $linkStt = URL::createLink('admin', 'group', 'ajaxStatus', array('id' => $id, 'status' => $item['status']));
-                            $linkAcp = URL::createLink('admin', 'group', 'ajaxACP', array('id' => $id, 'group_acp' => $item['group_acp']));
+                            $linkStt = URL::createLink('admin', 'category', 'ajaxStatus', array('id' => $id, 'status' => $item['status']));
                             $statusStr = Helper::cmsStatus($item['status'], $linkStt, $id);
-                            $acpStr = Helper::cmsGroupACP($item['group_acp'], $linkAcp, $id);
-                            $linkEditGroup = URL::createLink('admin', 'group', 'form', array('id' => $id));
+
+                            $linkEditCategory = URL::createLink('admin', 'category', 'form', array('id' => $id));
                             
                             ?>
                             <tr class="<?php echo $i; ?>">
                                 <td class="center"><?php echo $checkboxStr; ?></td>
-                                <td class="center"><a href="<?php echo $linkEditGroup; ?>"><?php echo $name; ?></a></td>
+                                <td class="center"><a href="<?php echo $linkEditCategory; ?>"><?php echo $name; ?></a></td>
                                 <td class="center"> <?php echo $statusStr; ?></td>
-                                <td class="center"> <?php echo $acpStr; ?></td>
                                 <td class="center"> <?php echo $ordering; ?></td>
                                 <td class="center"> <?php echo $createdAt; ?></td>
                                 <td class="center"> <?php echo $createdBy; ?></td>

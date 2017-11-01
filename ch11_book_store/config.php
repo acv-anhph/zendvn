@@ -26,6 +26,7 @@ define('DB_TABLE', 'group');
 // ====================== DATABASE TABLE===========================
 define('GROUP_TABLE', 'group');
 define('USER_TABLE', 'user');
+define('CATEGORY_TABLE', 'category');
 
 // ====================== DEFAULT ===========================
 define('DEFAULT_MODULE', 'default');

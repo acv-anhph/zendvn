@@ -8,18 +8,18 @@ class Model {
 
     public function __construct($params = array()) {
         if (!$params) {
-            $params['server'] = DB_HOST;
+            $params['server']   = DB_HOST;
             $params['username'] = DB_USER;
             $params['password'] = DB_PASS;
             $params['database'] = DB_NAME;
-            $params['table'] = DB_TABLE;
+            $params['table']    = DB_TABLE;
         }
 
         $link = mysqli_connect($params['server'], $params['username'], $params['password'], $params['database']);
         if (!$link) {
             die('Connect Error (' . mysqli_connect_errno() . ') ' . mysqli_connect_error());
         } else {
-            $this->conn = $link;
+            $this->conn  = $link;
             $this->table = $params['table'];
             $this->query("SET NAMES 'utf8'");
             $this->query("SET CHARACTER SET 'utf8'");
@@ -37,12 +37,12 @@ class Model {
     public function insert($data, $type = 'single') {
         if ($type == 'single') {
             $newQuery = $this->createInsertSQL($data);
-            $query = "INSERT INTO `$this->table`(" . $newQuery['cols'] . ") VALUES (" . $newQuery['vals'] . ")";
+            $query    = "INSERT INTO `$this->table`(" . $newQuery['cols'] . ") VALUES (" . $newQuery['vals'] . ")";
             mysqli_query($this->conn, $query);
         } else {
             foreach ($data as $value) {
                 $newQuery = $this->createInsertSQL($value);
-                $query = "INSERT INTO `$this->table`(" . $newQuery['cols'] . ") VALUES (" . $newQuery['vals'] . ")";
+                $query    = "INSERT INTO `$this->table`(" . $newQuery['cols'] . ") VALUES (" . $newQuery['vals'] . ")";
                 mysqli_query($this->conn, $query);
             }
         }
@@ -52,8 +52,8 @@ class Model {
 
     public function createInsertSQL($data) {
         $newQuery = array();
-        $cols = '';
-        $vals = '';
+        $cols     = '';
+        $vals     = '';
         if (!empty($data)) {
             foreach ($data as $key => $value) {
                 $cols .= ", `$key`";
@@ -75,9 +75,9 @@ class Model {
     }
 
     public function update($data, $where) {
-        $newSet = $this->createUpdateSQL($data);
+        $newSet   = $this->createUpdateSQL($data);
         $newWhere = $this->createWhereUpdateSQL($where);
-        $query = "UPDATE `$this->table` SET " . $newSet . " WHERE $newWhere";
+        $query    = "UPDATE `$this->table` SET " . $newSet . " WHERE $newWhere";
         $this->query($query);
 
         return $this->affectedRows();
@@ -118,7 +118,7 @@ class Model {
     // DELETE
     public function delete($where) {
         $newWhere = $this->createWhereDeleteSQL($where);
-        $query = "DELETE FROM `$this->table` WHERE `id` IN ($newWhere)";
+        $query    = "DELETE FROM `$this->table` WHERE `id` IN ($newWhere)";
         $this->query($query);
 
         return $this->affectedRows();

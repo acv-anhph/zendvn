@@ -1,7 +1,7 @@
 <?php
 
-include_once 'toolbar/index.php';
-include_once 'submenu/index.php';
+include_once (MODULE_PATH . 'admin/views/toolbar.php');
+include_once (MODULE_PATH . 'admin/views/submenu.php');
 
 $columnPost     = !empty($this->arrParam['filter-column']) ? $this->arrParam['filter-column'] : '';
 $orderPost      = !empty($this->arrParam['filter-column-dir']) ? $this->arrParam['filter-column-dir'] : '';

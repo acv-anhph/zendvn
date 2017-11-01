@@ -56,42 +56,34 @@ class Bootstrap {
             $action     = $this->_params['action'];
             $user       = Session::get('user');
             $logged = $user['login'] == true && ($user['time'] + SESSSION_LOGIN > time());
-            $adminPageLogin = ($controller == 'index') && ($action == 'login');
             $publicPageLogin = ($controller == 'user') && ($action == 'login');
 
             if ($module == 'admin') {
                 if ($logged) {
                     if ($user['group_acp'] == 1) {
-                        if ($adminPageLogin) {
-                            URL::redirect('admin', 'index', 'index');
-                        } else {
-                            $this->_controllerObj->$actionname();
-                        }
                         $this->_controllerObj->$actionname();
                     } else {
                         URL::redirect('default', 'index', 'notice', array('type' => 'not-permission'));
                     }
                 } else {
                     Session::delete('user');
-                    if ($adminPageLogin) {
-                        $this->_controllerObj->$actionname();
-                    } else {
-                        URL::redirect('admin', 'index', 'login');
+                    $filePath       = MODULE_PATH . $this->_params['module'] . DS . 'controllers' . DS . 'IndexController.php';
+                    if (file_exists($filePath)) {
+                        require_once $filePath;
+                        $indexController = new IndexController($this->_params);
+                        $indexController->loginAction();
                     }
                 }
             } else {
                 if ($logged) {
-                    if ($publicPageLogin) {
-                        URL::redirect('default', 'index', 'index');
-                    } else {
-                        $this->_controllerObj->$actionname();
-                    }
+                    $this->_controllerObj->$actionname();
                 } else {
                     Session::delete('user');
-                    if ($publicPageLogin) {
-                        $this->_controllerObj->$actionname();
-                    } else {
-                        URL::redirect('default', 'user', 'login');
+                    $filePath       = MODULE_PATH . $this->_params['module'] . DS . 'controllers' . DS . 'IndexController.php';
+                    if (file_exists($filePath)) {
+                        require_once $filePath;
+                        $indexController = new IndexController($this->_params);
+                        $indexController->loginAction();
                     }
                 }
             }
