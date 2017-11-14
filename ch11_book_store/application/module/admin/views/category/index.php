@@ -8,6 +8,7 @@ $orderPost      = !empty($this->arrParam['filter-column-dir']) ? $this->arrParam
 $keyword        = !empty($this->arrParam['filter_search']) ? $this->arrParam['filter_search'] : '';
 $filterState    = isset($this->arrParam['filter_state']) ? $this->arrParam['filter_state'] : 'default';
 $lblName        = Helper::cmsTitleSost('Name', 'name', $columnPost, $orderPost);
+$lblPicture		= Helper::cmsTitleSost('Picture', 'picture', $columnPost, $orderPost);
 $lblStatus      = Helper::cmsTitleSost('Status', 'status', $columnPost, $orderPost);
 $lblOrdering    = Helper::cmsTitleSost('Ordering', 'ordering', $columnPost, $orderPost);
 $lblCreated     = Helper::cmsTitleSost('Created', 'created', $columnPost, $orderPost);
@@ -61,6 +62,7 @@ if (isset($_SESSION['message'])) {
                     <tr>
                         <th width="1%"><input type="checkbox" name="checkall-toggle"></th>
                         <th class="title"><?php echo $lblName; ?></th>
+                        <th width="10%"><?php echo $lblPicture; ?></th>
                         <th width="10%"><?php echo $lblStatus; ?></th>
                         <th width="10%"><?php echo $lblOrdering; ?></th>
                         <th width="10%"><?php echo $lblCreated; ?></th>
@@ -93,7 +95,8 @@ if (isset($_SESSION['message'])) {
                             $name = $item['name'];
                             $ordering = $item['ordering'];
                             $name = $item['name'];
-                            
+                            $picturePath	= UPLOAD_PATH . 'category' . DS . '60x90-' . $item['picture'];
+                            $picture = (file_exists($picturePath)==true) ? '<img src="'.UPLOAD_URL . 'category' . DS . '60x90-' . $item['picture'].'">' : '' ;
                             $createdAt = Helper::dateFormat('d-m-y', $item['created']);
                             $createdBy = $item['created_by'];
                             $modifiedAt = Helper::dateFormat('d-m-y', $item['modified']);
@@ -110,6 +113,7 @@ if (isset($_SESSION['message'])) {
                             <tr class="<?php echo $i; ?>">
                                 <td class="center"><?php echo $checkboxStr; ?></td>
                                 <td class="center"><a href="<?php echo $linkEditCategory; ?>"><?php echo $name; ?></a></td>
+                                <td class="center"> <?php echo $picture; ?></td>
                                 <td class="center"> <?php echo $statusStr; ?></td>
                                 <td class="center"> <?php echo $ordering; ?></td>
                                 <td class="center"> <?php echo $createdAt; ?></td>

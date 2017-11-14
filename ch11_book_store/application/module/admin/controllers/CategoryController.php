@@ -27,10 +27,13 @@ class CategoryController extends Controller {
         }
 
         if (isset($this->_arrParam['form']) && !empty($this->_arrParam['form']['token'])) {
+            $this->_arrParam['form']['picture'] = !empty($_FILES['picture']) ? $_FILES['picture'] : array();
             $validate = new Validate($this->_arrParam['form']);
             $validate->addRule('name', 'string', array('min' => 3, 'max' => 255))
                      ->addRule('ordering', 'int', array('min' => 1, 'max' => 100))
-                     ->addRule('status', 'status', array('deny' => array('default')));
+                     ->addRule('status', 'status', array('deny' => array('default')))
+                     ->addRule('picture', 'file', array('min' => 100, 'max' => 100000, 'extension' => array('jpg', 'png', 'gif')), false)
+            ;
             $validate->run();
             $this->_arrParam['form'] = $validate->getResult();
             if($validate->isValid() == false){

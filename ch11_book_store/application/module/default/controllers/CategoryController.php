@@ -11,6 +11,8 @@ class CategoryController extends Controller {
     }
     
     public function indexAction() {
+        $this->_view->_title 		= 'Category List';
+        $this->_view->Items 		= $this->_model->listItem($this->_arrParam, null);
         $this->_view->render('category/index');
 	}
 
