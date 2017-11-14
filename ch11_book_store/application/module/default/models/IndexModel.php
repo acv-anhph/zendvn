@@ -9,6 +9,31 @@ class IndexModel extends Model {
         $this->setTable(USER_TABLE);
     }
 
+    public function listItem($arrParam, $option = null){
+        if($option['task'] == 'books-special'){
+            $query[]	= "SELECT `id`, `name`, `picture`, `description`";
+            $query[]	= "FROM `".BOOK_TABLE."`";
+            $query[]	= "WHERE `status`  = 1 AND `special` = 1";
+            $query[]	= "ORDER BY `ordering` ASC";
+            $query[]	= "LIMIT 0, 2";
+
+            $query		= implode(" ", $query);
+            $result		= $this->fetchAll($query);
+            return $result;
+        }
+        if($option['task'] == 'books-new'){
+            $query[]	= "SELECT `id`, `name`, `picture`, `description`";
+            $query[]	= "FROM `".BOOK_TABLE."`";
+            $query[]	= "WHERE `status`  = 1";
+            $query[]	= "ORDER BY `id` DESC";
+            $query[]	= "LIMIT 0, 3";
+
+            $query		= implode(" ", $query);
+            $result		= $this->fetchAll($query);
+            return $result;
+        }
+    }
+
     public function saveItem($arrParam, $option = null) {
         if ($option['task'] == 'user-register') {
             $arrParam['form']['register_date'] = date('Y-m-d H:m:s', time());

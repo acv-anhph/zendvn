@@ -11,7 +11,7 @@ define('BLOCK_PATH', APPLICATION_PATH . 'block' . DS);                  // Đị
 define('TEMPLATE_PATH', PUBLIC_PATH . 'templates' . DS);                // Định nghĩa đường dẫn đến thư mục template
 define('UPLOAD_PATH', PUBLIC_PATH . 'uploads' . DS);                    // Định nghĩa đường dẫn đến thư mục template
 define('SCRIPT_PATH', PUBLIC_PATH . 'scripts' . DS);                    // Định nghĩa đường dẫn đến thư mục template
-define ('LIBRARY_EXT_PATH'	, LIBRARY_PATH . 'extend' . DS);
+define('LIBRARY_EXT_PATH'	, LIBRARY_PATH . 'extend' . DS);
 
 
 define('ROOT_URL', DS . 'ch11_book_store' . DS);
@@ -32,6 +32,7 @@ define('DB_TABLE', 'group');
 define('GROUP_TABLE', 'group');
 define('USER_TABLE', 'user');
 define('CATEGORY_TABLE', 'category');
+define('BOOK_TABLE', 'book');
 
 // ====================== DEFAULT ===========================
 define('DEFAULT_MODULE', 'default');

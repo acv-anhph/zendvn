@@ -1,33 +1,37 @@
+<?php
+$model = new Model();
+
+$query	= "SELECT `id`, `name`, `picture` FROM `".BOOK_TABLE."` WHERE `status`  = 1 AND `sale_off` > 0 ORDER BY `ordering` ASC LIMIT 0,2";
+
+$listBooks	= $model->fetchAll($query);
+
+$xhtml		= '';
+if(!empty($listBooks)){
+    foreach($listBooks as $key => $value){
+        $link	= URL::createLink('default', 'book', 'detail', array('book_id' => $value['id']));
+        $name	= $value['name'];
+
+        $picturePath	= UPLOAD_PATH . 'book' . DS . '98x150-' . $value['picture'];
+        if(file_exists($picturePath)==true){
+            $picture	= '<img class="thumb" width="60" height="90" src="'.UPLOAD_URL . 'book' . DS . '98x150-' . $value['picture'].'">';
+        }else{
+            $picture	= '<img class="thumb" width="60" height="90" src="'.UPLOAD_URL . 'book' . DS . '98x150-default.jpg' .'">';
+        }
+
+        $xhtml	.= '<div class="new_prod_box">
+	                        <a href="'.$link.'">'.$name.'</a>
+	                        <div class="new_prod_bg">
+	                        <span class="new_icon"><img src="'.$this->_dirImg.'/promo_icon.gif" alt="" title="" /></span>
+	                        <a href="'.$link.'">'.$picture.'</a>
+	                        </div>
+	                    </div>';
+    }
+}
+?>
 <div class="right_box">
 
-    <div class="title"><span class="title_icon"><img src="<?php echo $imgURL; ?>/bullet4.gif" alt=""
-                                                     title=""/></span>Promotions
+    <div class="title">
+        <span class="title_icon"><img src="<?php echo $imageURL; ?>/bullet4.gif" alt="" title="" /></span>Promotions
     </div>
-    <div class="new_prod_box">
-        <a href="details.html">product name</a>
-        <div class="new_prod_bg">
-            <span class="new_icon"><img src="<?php echo $imgURL; ?>/promo_icon.gif" alt="" title=""/></span>
-            <a href="details.html"><img src="<?php echo $imgURL; ?>/thumb1.gif" alt="" title=""
-                                        class="thumb" border="0"/></a>
-        </div>
-    </div>
-
-    <div class="new_prod_box">
-        <a href="details.html">product name</a>
-        <div class="new_prod_bg">
-            <span class="new_icon"><img src="<?php echo $imgURL; ?>/promo_icon.gif" alt="" title=""/></span>
-            <a href="details.html"><img src="<?php echo $imgURL; ?>/thumb2.gif" alt="" title=""
-                                        class="thumb" border="0"/></a>
-        </div>
-    </div>
-
-    <div class="new_prod_box">
-        <a href="details.html">product name</a>
-        <div class="new_prod_bg">
-            <span class="new_icon"><img src="<?php echo $imgURL; ?>/promo_icon.gif" alt="" title=""/></span>
-            <a href="details.html"><img src="<?php echo $imgURL; ?>/thumb3.gif" alt="" title=""
-                                        class="thumb" border="0"/></a>
-        </div>
-    </div>
-
+    <?php echo $xhtml;?>
 </div>

@@ -54,7 +54,7 @@ class Validate {
     // Run
     public function run() {
         foreach ($this->rules as $element => $value) {
-            if ($value['required'] == true && trim($this->source[$element]) == null) {
+            if ($value['required'] == true && is_string($this->source[$element]) && trim($this->source[$element]) == null) {
                 $this->setError($element, 'is not empty');
             } else {
                 switch ($value['type']) {

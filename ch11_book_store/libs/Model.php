@@ -5,7 +5,6 @@ class Model {
     protected $table;
     protected $resultQuery;
 
-
     public function __construct($params = array()) {
         if (!$params) {
             $params['server']   = DB_HOST;

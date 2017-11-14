@@ -9,10 +9,14 @@ class IndexController extends Controller {
         $this->_templateObj->setFileConfig('template.ini');
         $this->_templateObj->load();
     }
-    
-    public function indexAction() {
+
+    public function indexAction(){
+        $this->_view->_title	= 'Book Store';
+
+        $this->_view->specialBooks	= $this->_model->listItem($this->_arrParam, array('task' => 'books-special'));
+        $this->_view->newBooks		= $this->_model->listItem($this->_arrParam, array('task' => 'books-new'));
         $this->_view->render('index/index');
-	}
+    }
 
     public function noticeAction() {
         $this->_view->render('index/notice');
