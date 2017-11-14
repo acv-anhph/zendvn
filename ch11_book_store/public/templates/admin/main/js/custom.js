@@ -33,6 +33,14 @@ $(document).ready(function (e) {
     $("#filter-bar select[name='filter_group']").change(function () {
         $('#adminForm').submit();
     });
+
+    $("#filter-bar select[name='filter_category_id']").change(function () {
+        $('#adminForm').submit();
+    });
+
+    $("#filter-bar select[name='filter_special']").change(function () {
+        $('#adminForm').submit();
+    });
 });
 
 function sortList (column, order) {
@@ -61,6 +69,26 @@ function changeStatus (url) {
 
         $(element + ' span').removeClass(classRemove).addClass(classAdd);
         $(element).attr('href', 'javascript:changeStatus(\'' + link + '\');');
+
+    }, 'json');
+}
+
+function changeSpecial (url) {
+    $.get(url, function (data) {
+        var id = data.id;
+        var status = data.special;
+        var link = data.link;
+        var element = 'a#special-' + id;
+        var classRemove = 'unpublish';
+        var classAdd = 'publish';
+
+        if (status == 0) {
+            classRemove = 'publish';
+            classAdd = 'unpublish';
+        }
+
+        $(element + ' span').removeClass(classRemove).addClass(classAdd);
+        $(element).attr('href', 'javascript:changeSpecial(\'' + link + '\');');
 
     }, 'json');
 }

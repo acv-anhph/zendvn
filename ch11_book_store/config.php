@@ -32,6 +32,7 @@ define('DB_TABLE', 'group');
 define('GROUP_TABLE', 'group');
 define('USER_TABLE', 'user');
 define('CATEGORY_TABLE', 'category');
+define('BOOK_TABLE', 'book');
 
 // ====================== DEFAULT ===========================
 define('DEFAULT_MODULE', 'default');

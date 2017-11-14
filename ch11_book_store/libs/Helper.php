@@ -129,4 +129,21 @@ class Helper {
         return $xhtml;
     }
 
+    public static function cmsSpecial($statusValue, $link, $id){
+        $strStatus = ($statusValue == 0) ? 'unpublish' : 'publish';
+
+        $xhtml		= '<a class="jgrid" id="special-'.$id.'" href="javascript:changeSpecial(\''.$link.'\');">
+							<span class="state '.$strStatus.'"></span>
+						</a>';
+        return $xhtml;
+    }
+
+    public static function formatDate($format, $value){
+        $result = '';
+        if(!empty($value) && $value != '0000-00-00' ){
+            $result = date($format, strtotime($value));
+        }
+        return $result;
+    }
+
 }
