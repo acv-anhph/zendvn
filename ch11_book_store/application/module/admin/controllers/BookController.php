@@ -23,7 +23,11 @@ class BookController extends Controller {
 
     public function formAction() {
         $this->_view->_title = 'Book Manager: Add New Book';
+
         $this->_view->category = $this->_model->itemInSelectbox($this->_arrParam, null);
+
+        $this->_view->selectbox = $this->_model->itemInSelectbox($this->_arrParam, null);
+
 
         if (!empty($this->_arrParam['id'])) {
             $this->_view->_title = 'book Manager: Edit book';
@@ -31,10 +35,9 @@ class BookController extends Controller {
         }
 
         if (isset($this->_arrParam['form']['token'])) {
+
             $this->_arrParam['form']['picture'] = !empty($_FILES['picture']) ? $_FILES['picture'] : array();
-            echo '<pre>';
-            print_r($this->_arrParam['form']);
-            echo '</pre>';
+
             $validate = new Validate($this->_arrParam['form']);
             $validate->addRule('name', 'string', array('min' => 1, 'max' => 255))
                     ->addRule('picture', 'file', array('min' => 100, 'max' => 1000000, 'extension' => array('jpg', 'png')))
@@ -44,6 +47,7 @@ class BookController extends Controller {
                     ->addRule('category_id', 'status', array('deny' => array('default')))
                     ->addRule('price', 'int', array('min' => 1000, 'max' => '1000000'))
                     ->addRule('sale_off', 'int', array('min' => 0, 'max' => '100'));
+
             $validate->run();
             $this->_arrParam['form'] = $validate->getResult();
             if ($validate->isValid() == false) {

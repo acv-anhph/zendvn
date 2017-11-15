@@ -19,7 +19,6 @@ class BookModel extends Model {
 
     private $_user;
 
-
     public function __construct() {
         parent::__construct();
         $this->setTable(BOOK_TABLE);
@@ -248,7 +247,7 @@ class BookModel extends Model {
 
     public function infoItem($arrParam, $option = null){
         if($option == null){
-            $query[]	= "SELECT *";
+            $query[]	= "SELECT `id`, `description`, `picture`,`name`, `price`, `special`,`sale_off`,`category_id`, `status`, `ordering`";
             $query[]	= "FROM `$this->table`";
             $query[]	= "WHERE `id` = '" . $arrParam['id'] . "'";
             $query		= implode(" ", $query);
